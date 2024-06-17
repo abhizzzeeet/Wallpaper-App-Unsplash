@@ -58,7 +58,19 @@ dependencies {
 
     // coroutine
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    // ViewModel and LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    // Paging
+    implementation("androidx.paging:paging-runtime-ktx:3.1.1")
+
+    //recycler view
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    //picasso
+    implementation("com.squareup.picasso:picasso:2.71828")
+
+    implementation("androidx.fragment:fragment-ktx:1.3.0")
 }

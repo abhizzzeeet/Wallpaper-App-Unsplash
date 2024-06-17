@@ -1,6 +1,7 @@
 package com.example.wallpaperapp4
 
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.i("Print something","Print Something")
         // Create the object of Toolbar, ViewPager and
         // TabLayout and use “findViewById()” method*/
         var tab_toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         // If we dont use setupWithViewPager() method then
         // tabs are not used or shown when activity opened
         tab_tablayout.setupWithViewPager(tab_viewpager)
+
+        Log.i("Print something","Print Something")
     }
 
     // This function is used to add items in arraylist and assign

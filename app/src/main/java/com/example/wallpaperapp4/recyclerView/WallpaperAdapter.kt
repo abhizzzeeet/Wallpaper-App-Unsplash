@@ -8,6 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wallpaperapp4.R
+import com.example.wallpaperapp4.blurhashdecoder.BlurHashDecoder
 import com.example.wallpaperapp4.models.Wallpaper
 import com.squareup.picasso.Picasso
 
@@ -26,16 +27,20 @@ class WallpaperAdapter : PagingDataAdapter<Wallpaper, WallpaperAdapter.Wallpaper
         }
     }
 
-    class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val wallpaperImageView: ImageView = itemView.findViewById(R.id.wallpaperImageView)
 
         fun bind(wallpaper: Wallpaper) {
+            val blurHash = wallpaper.blur_hash
+            val imageUrl = wallpaper.urls.small
+
+            // Decode BlurHash into Bitmap and load image using Picasso
+            decodeBlurHashAndLoad(blurHash, imageUrl, wallpaperImageView)
             // Example of using Picasso to load image from URL into ImageView
-            Picasso.get()
-                .load(wallpaper.urls.small)  // Load the small size image URL
-                .into(wallpaperImageView)
+
         }
+
     }
 
     object WallpaperComparator : DiffUtil.ItemCallback<Wallpaper>() {
@@ -46,5 +51,15 @@ class WallpaperAdapter : PagingDataAdapter<Wallpaper, WallpaperAdapter.Wallpaper
         override fun areContentsTheSame(oldItem: Wallpaper, newItem: Wallpaper): Boolean {
             return oldItem == newItem
         }
+    }
+    private fun decodeBlurHashAndLoad(blurHash: String, imageUrl: String, imageView: ImageView) {
+        // Decode BlurHash into Bitmap
+        val bitmap = BlurHashDecoder.decode(blurHash, 32, 32)
+
+        // Load image using Picasso
+        Picasso.get()
+            .load(imageUrl)
+//            .placeholder(bitmap) // Placeholder with BlurHash decoded bitmap
+            .into(imageView)
     }
 }

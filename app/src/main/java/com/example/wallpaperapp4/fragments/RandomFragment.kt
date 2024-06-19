@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wallpaperapp4.R
@@ -39,7 +40,7 @@ class RandomFragment : Fragment() {
         adapter = WallpaperAdapter()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.wallpaperRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         recyclerView.adapter = adapter
 
         lifecycleScope.launch {

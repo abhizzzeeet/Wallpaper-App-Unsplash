@@ -4,11 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/wallpaperImageView"
+    <TextView
+        android:id="@+id/topicTextView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_margin="10dp" />
+        android:layout_height="wrap_content"
+        android:text="topicName">
+    </TextView>
 
 </LinearLayout>

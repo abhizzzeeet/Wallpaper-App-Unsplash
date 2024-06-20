@@ -21,5 +21,13 @@ class WallpaperRepository(private val api: RetrofitApi) {
         ).flow
     }
 
-
+    fun getTopics(): Flow<PagingData<Topic>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { TopicPagingSource(api) }
+        ).flow
+    }
 }

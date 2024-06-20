@@ -19,4 +19,11 @@ interface RetrofitApi {
         @Query("page") page: Int = 1,
         @Query("per_page") per_page: Int = 10
     ) : List<Topic>
+
+    @GET("/topics/{id_or_slug}/photos")
+    suspend fun getTopicPhotos(
+        @Query("id_or_slug") topic_id: String ,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 10
+    ) : List<Wallpaper>
 }

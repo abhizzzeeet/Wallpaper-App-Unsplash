@@ -23,13 +23,7 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
-        android:id="@+id/topicId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="topic id">
 
-    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/topicCollectionRecyclerView"
         android:layout_width="match_parent"

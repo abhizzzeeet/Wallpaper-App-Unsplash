@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 
 
 
-class TopicCollectionAdapter() : PagingDataAdapter<Wallpaper, TopicCollectionAdapter.TopicCollectionViewHolder>(TopicCollectionComparator) {
+class TopicCollectionAdapter(private val onImageClick: (String?) -> Unit) : PagingDataAdapter<Wallpaper, TopicCollectionAdapter.TopicCollectionViewHolder>(TopicCollectionComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicCollectionViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_wallpapers, parent, false)
@@ -27,6 +27,12 @@ class TopicCollectionAdapter() : PagingDataAdapter<Wallpaper, TopicCollectionAda
         val wallpaper = getItem(position)
         wallpaper?.let {
             holder.bind(it)
+        }
+
+        val fullImageUrl: String? = wallpaper?.urls?.full
+
+        holder.itemView.setOnClickListener{
+            onImageClick(fullImageUrl)
         }
     }
 

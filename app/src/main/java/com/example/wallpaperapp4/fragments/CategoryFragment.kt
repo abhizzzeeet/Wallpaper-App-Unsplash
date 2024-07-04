@@ -66,6 +66,7 @@ class CategoryFragment : Fragment(), OnTopicClickListener {
     override fun OnTopicClick(topic: Topic) {
         val intent = Intent(requireContext(), TopicCollectionActivity::class.java)
         intent.putExtra("TOPIC_ID", topic.id)
+        intent.putExtra("TOPIC_TITLE", topic.title)
         startActivity(intent)
     }
 

@@ -6,7 +6,7 @@ data class Wallpaper(
     val urls: Url
 )
 
-data class Url(
+data class Url( 
     val raw: String,
     val full: String,
     val small: String

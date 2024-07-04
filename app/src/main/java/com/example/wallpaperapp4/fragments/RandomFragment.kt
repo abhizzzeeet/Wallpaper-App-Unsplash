@@ -1,5 +1,6 @@
 package com.example.wallpaperapp4.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wallpaperapp4.ImageDetailActivity
 import com.example.wallpaperapp4.R
 import com.example.wallpaperapp4.networking.RetrofitApi
 import com.example.wallpaperapp4.networking.RetrofitObject
@@ -37,7 +39,12 @@ class RandomFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_random, container, false)
 
-        adapter = WallpaperAdapter()
+        adapter = WallpaperAdapter{ fullImageUrl ->
+            val intent = Intent(activity, ImageDetailActivity::class.java).apply{
+                putExtra("fullImageUrl", fullImageUrl)
+            }
+            startActivity(intent)
+        }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.wallpaperRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(requireContext(),2)

@@ -1,8 +1,10 @@
 package com.example.wallpaperapp4
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 
 import androidx.activity.viewModels
 
@@ -25,14 +27,16 @@ class TopicCollectionActivity : AppCompatActivity() {
 
 
     private lateinit var adapter: TopicCollectionAdapter
+    private lateinit var topicTitleTextView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic_collection)
 
-        val topicId : String = intent.getStringExtra("TOPIC_ID") ?: "0000"
+        val topicId : String = intent.getStringExtra("TOPIC_ID") ?: ""
+        val topicTitle : String = intent.getStringExtra("TOPIC_TITLE") ?: ""
 
-
-
+        topicTitleTextView = findViewById(R.id.topic_title)
+        topicTitleTextView.text = topicTitle
         // launching a new coroutine
 //        GlobalScope.launch {
 //            val result = RetrofitObject.api.getTopicPhotos( topicId, "k8og2spo_YGZ6_mjupQlH8z8FPk-U5omv3RdHskTr34", 1,10)
@@ -45,7 +49,12 @@ class TopicCollectionActivity : AppCompatActivity() {
             TopicCollectionViewModelFactory(WallpaperRepository(RetrofitObject.api) , topicId)
         }
 
-        adapter = TopicCollectionAdapter()
+        adapter = TopicCollectionAdapter{ fullImageUrl ->
+            val intent = Intent(this, ImageDetailActivity::class.java).apply{
+                putExtra("fullImageUrl", fullImageUrl)
+            }
+            startActivity(intent)
+        }
 
         val recyclerView = findViewById<RecyclerView>(R.id.topicCollectionRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(this,2)

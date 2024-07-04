@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
 }
 
 android {
@@ -73,4 +74,6 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
 
     implementation("androidx.fragment:fragment-ktx:1.3.0")
+
+
 }

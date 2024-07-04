@@ -13,7 +13,7 @@ import com.example.wallpaperapp4.models.Wallpaper
 import com.squareup.picasso.Picasso
 
 
-class WallpaperAdapter : PagingDataAdapter<Wallpaper, WallpaperAdapter.WallpaperViewHolder>(WallpaperComparator) {
+class WallpaperAdapter(private val onImageClick: (String?) -> Unit) : PagingDataAdapter<Wallpaper, WallpaperAdapter.WallpaperViewHolder>(WallpaperComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallpaperViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_wallpapers, parent, false)
@@ -24,7 +24,14 @@ class WallpaperAdapter : PagingDataAdapter<Wallpaper, WallpaperAdapter.Wallpaper
         val wallpaper = getItem(position)
         wallpaper?.let {
             holder.bind(it)
+            holder.itemView.setOnClickListener{
+                var fullImageUrl: String? = wallpaper.urls.full
+                onImageClick(fullImageUrl)
+            }
         }
+
+
+
     }
 
     inner class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,12 +41,13 @@ class WallpaperAdapter : PagingDataAdapter<Wallpaper, WallpaperAdapter.Wallpaper
         fun bind(wallpaper: Wallpaper) {
             val blurHash = wallpaper.blur_hash
             val imageUrl = wallpaper.urls.small
-
+            val fullImageUrl = wallpaper.urls.full
             // Decode BlurHash into Bitmap and load image using Picasso
             decodeBlurHashAndLoad(blurHash, imageUrl, wallpaperImageView)
             // Example of using Picasso to load image from URL into ImageView
 
         }
+
 
     }
 
